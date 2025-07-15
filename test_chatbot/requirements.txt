@@ -1,0 +1,5 @@
+# Core packages for ChatGloom2000 chatbot
+streamlit==1.43.1
+langchain>=0.3.18
+langchain-aws>=0.2.18
+boto3>=1.37.11
