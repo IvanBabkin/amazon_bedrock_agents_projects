@@ -29,10 +29,22 @@ if input_text and input_text.strip():
         input_text=input_text,
         memory=st.session_state.memory)
     
+    # Display reasoning FIRST if available
+    if chat_response["reasoning"]:
+        with st.chat_message("assistant", avatar="test_chatbot/DALL_E_ChatGloom2000.png"):
+            st.markdown("🧠 **Model's Internal Reasoning:**")
+            st.markdown(chat_response["reasoning"])
+        
+        st.session_state.chat_history.append({
+            "role":"assistant", 
+            "text": f"🧠 **Reasoning:** {chat_response['reasoning']}", 
+            "avatar":"test_chatbot/DALL_E_ChatGloom2000.png"})
+    
+    # Display main response AFTER reasoning
     with st.chat_message("assistant", avatar="test_chatbot/DALL_E_ChatGloom2000.png"): 
-        st.markdown(chat_response) 
+        st.markdown(chat_response["main_response"]) 
     
     st.session_state.chat_history.append({
         "role":"assistant", 
-        "text":chat_response, 
+        "text":chat_response["main_response"], 
         "avatar":"test_chatbot/DALL_E_ChatGloom2000.png"}) 
